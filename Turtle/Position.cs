@@ -2,25 +2,19 @@
 
 namespace Turtle
 {
-	internal class Position
+	public class Position : Location
 	{
-		public int X { get; set; }
-		public int Y { get; set; }
 		public Direction Direction { get; set; }
 		public int MaxX { get; set; }
 		public int MaxY { get; set; }
 
-		public Position(int x, int y, Direction direction)
+		public Position(int x, int y, Direction direction) : base(x, y)
 		{
-			X = x;
-			Y = y;
 			Direction = direction;
 		}
 
-		public Position(Position position)
+		public Position(Position position) : base(position.X, position.Y)
 		{
-			X = position.X;
-			Y = position.Y;
 			Direction = position.Direction;
 			MaxX = position.MaxX;
 			MaxY = position.MaxY;
@@ -52,7 +46,7 @@ namespace Turtle
 		private void ConfirmPositionIsValid()
 		{
 			if (X < 0 || Y < 0 || X >= MaxX || Y >= MaxY)
-				throw new Exception($"Location ({X}, {Y}) is not valid.");
+				throw new InvalidOperationException($"Location ({X}, {Y}) is not valid.");
 		}
 
 		public void Turn()
